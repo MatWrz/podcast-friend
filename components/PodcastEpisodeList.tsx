@@ -1,12 +1,13 @@
 import React from 'react';
 import PodcastEpisode from './PodcastEpisode';
+import { PodcastEpisode as podcastEpisode } from 'types';
 
 interface Props {
-  readonly podcastEpisodes: ReadonlyArray<PodcastEpisode>;
+  readonly podcastEpisodes: ReadonlyArray<podcastEpisode>;
 }
 
 const displayPodcastEpisodes: (
-  podcastEpisodes: ReadonlyArray<PodcastEpisode>
+  podcastEpisodes: ReadonlyArray<podcastEpisode>
 ) => JSX.Element[] = (podcastEpisodes) => {
   return podcastEpisodes.map((podcastEpisode, index) => (
     <PodcastEpisode key={index} {...podcastEpisode} />

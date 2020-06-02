@@ -1,4 +1,5 @@
 import React from 'react';
+import { PodcastEpisode as podcastEpisode } from 'types';
 
 const prettyPrintTime: (number) => string = (time) => {
   // Hours, minutes and seconds
@@ -18,7 +19,7 @@ const prettyPrintTime: (number) => string = (time) => {
   return ret;
 };
 
-const PodcastEpisode: React.FC<PodcastEpisode> = ({ title, length, src }) => {
+const PodcastEpisode: React.FC<podcastEpisode> = ({ title, length, src }) => {
   return (
     <div className="podcast-episode">
       <h3 className="podcast-episode-title">{title}</h3>
