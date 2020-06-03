@@ -1,7 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
 import PodcastInput from 'components/PodcastInput';
-import PodcastEpisode from 'components/PodcastEpisode';
+import PodcastEpisodeList from 'components/PodcastEpisodeList';
+import { PodcastEpisode as podcastEpisode } from 'types';
+
+const episode: podcastEpisode = {
+  title: 'Test',
+  src:
+    'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
+  length: 174,
+};
 
 export default function Home(): JSX.Element {
   return (
@@ -13,11 +21,7 @@ export default function Home(): JSX.Element {
 
       <main>
         <PodcastInput />
-        <PodcastEpisode
-          title="Test"
-          src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"
-          length={145}
-        />
+        <PodcastEpisodeList podcastEpisodes={[episode, episode]} />
       </main>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import 'minireset.css';
 import 'styles/application.scss';
 import { AppProps } from 'next/app';
 

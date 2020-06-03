@@ -1,6 +1,10 @@
-// Page specific CSS
+// Dependencies
+@import 'minireset.sass';
+@import 'react-h5-audio-player/src/styles.scss';
+
+// Pages
 @import './pages/index.scss';
 
-// Component CSS
+// Components
 @import './components/podcast-input.scss';
 @import './components/podcast-episode.scss';
