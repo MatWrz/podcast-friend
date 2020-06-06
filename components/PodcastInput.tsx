@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface PodcastInput {
+interface Props {
   onSubmit?: () => void;
 }
 
-const PodcastInput: React.FC<PodcastInput> = () => {
+const PodcastInput: React.FC<Props> = () => {
   return (
     <div className="podcast-input">
       <input type="text" />

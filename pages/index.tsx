@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PodcastInput from 'components/PodcastInput';
 import PodcastEpisodeList from 'components/PodcastEpisodeList';
 import { PodcastEpisode as podcastEpisode } from 'types';
+import PodcastProvider from 'components/PodcastProvider';
 
 const episode: podcastEpisode = {
   title: 'Test',
@@ -20,8 +21,10 @@ export default function Home(): JSX.Element {
       </Head>
 
       <main>
-        <PodcastInput />
-        <PodcastEpisodeList podcastEpisodes={[episode, episode]} />
+        <PodcastProvider podcastURL="https://cors-anywhere.herokuapp.com/http://feeds.serialpodcast.org/serialpodcast?format=xml">
+          <PodcastInput />
+          <PodcastEpisodeList podcastEpisodes={[episode, episode]} />
+        </PodcastProvider>
       </main>
     </div>
   );
