@@ -49,14 +49,21 @@ class PodcastProvider extends React.Component<Props, State> {
     this.fetchPodcast();
   }
 
+  async componentDidUpdate(prevProps: Props): Promise<void> {
+    if (prevProps.podcastURL !== this.props.podcastURL) {
+      this.setState(
+        { podcastURL: this.props.podcastURL, podcastEpisodes: [] },
+        this.fetchPodcast
+      );
+    }
+  }
+
   async fetchPodcast(): Promise<void> {
-    // AJAX call to retrieve XML then parse result to create podcast episodes
     const api = ky.extend({
       hooks: {
         beforeRequest: [
           (request): void => {
             request.headers.set('Content-Type', 'application/xml');
-            request.headers.set('Origin', 'localhost');
           },
         ],
       },
@@ -66,7 +73,20 @@ class PodcastProvider extends React.Component<Props, State> {
       response,
       'application/xml'
     );
-    console.log(document.children);
+    if (document !== null && document.getElementsByTagName('rss').length > 0) {
+      const rssElement = document.getElementsByTagName('rss')[0];
+      const items = rssElement.getElementsByTagName('item');
+      const podcastEpisodes: ReadonlyArray<PodcastEpisode> = Array.from(
+        items
+      ).map((item) => {
+        return {
+          title: item.getElementsByTagName('title')[0].textContent,
+          length: 44,
+          src: item.getElementsByTagName('enclosure')[0].getAttribute('url'),
+        };
+      });
+      this.setState({ podcastEpisodes: podcastEpisodes });
+    }
   }
 
   async updatePodcastURL(podcastURL: string): Promise<void> {

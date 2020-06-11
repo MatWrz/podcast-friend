@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 interface Props {
-  onSubmit?: () => void;
+  readonly podcastURL: string;
+  readonly onSubmit?: (podcastURL) => void;
 }
 
-const PodcastInput: React.FC<Props> = () => {
+const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit }) => {
+  const podcastURLInput = useRef(null);
   return (
     <div className="podcast-input">
-      <input type="text" />
-      <button>Fetch Podcast</button>
+      <input type="text" ref={podcastURLInput} />
+      <button onClick={(): void => onSubmit(podcastURLInput.current.value)}>
+        Fetch Podcast
+      </button>
     </div>
   );
 };
