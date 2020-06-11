@@ -10,7 +10,14 @@ const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit }) => {
   return (
     <div className="podcast-input">
       <input type="text" ref={podcastURLInput} />
-      <button onClick={(): void => onSubmit(podcastURLInput.current.value)}>
+      <button
+        onClick={(): void =>
+          onSubmit(
+            'https://cors-anywhere.herokuapp.com/' +
+              podcastURLInput.current.value
+          )
+        }
+      >
         Fetch Podcast
       </button>
     </div>

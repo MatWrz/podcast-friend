@@ -10,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "ky": "^0.20.0",
     "minireset.css": "^0.0.6",
     "next": "9.4.0",
     "react": "16.13.1",

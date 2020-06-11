@@ -1,6 +1,5 @@
 import React from 'react';
 import { PodcastEpisode } from 'types';
-import ky from 'ky/umd';
 
 interface Props {
   readonly podcastURL: string;
@@ -59,18 +58,14 @@ class PodcastProvider extends React.Component<Props, State> {
   }
 
   async fetchPodcast(): Promise<void> {
-    const api = ky.extend({
-      hooks: {
-        beforeRequest: [
-          (request): void => {
-            request.headers.set('Content-Type', 'application/xml');
-          },
-        ],
+    const response = await fetch(this.state.podcastURL, {
+      headers: {
+        'Content-Type': 'application/xml',
       },
     });
-    const response = await api(this.state.podcastURL).text();
+    const responseBody = await response.text();
     const document = new DOMParser().parseFromString(
-      response,
+      responseBody,
       'application/xml'
     );
     if (document !== null && document.getElementsByTagName('rss').length > 0) {
@@ -81,7 +76,6 @@ class PodcastProvider extends React.Component<Props, State> {
       ).map((item) => {
         return {
           title: item.getElementsByTagName('title')[0].textContent,
-          length: 44,
           src: item.getElementsByTagName('enclosure')[0].getAttribute('url'),
         };
       });
