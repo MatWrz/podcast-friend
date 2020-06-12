@@ -3,6 +3,7 @@ import Head from 'next/head';
 import PodcastInput from 'components/PodcastInput';
 import PodcastEpisodeList from 'components/PodcastEpisodeList';
 import PodcastProvider, { PodcastConsumer } from 'components/PodcastProvider';
+import AudioPlayer from 'react-h5-audio-player';
 
 export default function Home(): JSX.Element {
   const [podcastUrl, setPodcastUrl] = useState('');
@@ -12,10 +13,9 @@ export default function Home(): JSX.Element {
         <title>Compodre | Podcast Listener</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>
-        <PodcastInput podcastURL={podcastUrl} onSubmit={setPodcastUrl} />
-        <PodcastProvider podcastURL={podcastUrl}>
+      <PodcastProvider podcastURL={podcastUrl}>
+        <main className="index-page-main">
+          <PodcastInput podcastURL={podcastUrl} onSubmit={setPodcastUrl} />
           <PodcastConsumer>
             {(podcastContext): ReactNode => (
               <PodcastEpisodeList
@@ -23,8 +23,11 @@ export default function Home(): JSX.Element {
               />
             )}
           </PodcastConsumer>
-        </PodcastProvider>
-      </main>
+        </main>
+        <footer className="index-page-footer">
+          <AudioPlayer />
+        </footer>
+      </PodcastProvider>
     </div>
   );
 }
