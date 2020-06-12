@@ -7,20 +7,23 @@ interface Props {
 
 const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit }) => {
   const podcastURLInput = useRef(null);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    onSubmit(
+      'https://cors-anywhere.herokuapp.com/' + podcastURLInput.current.value
+    );
+  };
   return (
-    <div className="podcast-input">
-      <input type="text" ref={podcastURLInput} />
-      <button
-        onClick={(): void =>
-          onSubmit(
-            'https://cors-anywhere.herokuapp.com/' +
-              podcastURLInput.current.value
-          )
-        }
-      >
-        Fetch Podcast
-      </button>
-    </div>
+    <form className="podcast-input" onSubmit={handleSubmit}>
+      <label htmlFor="podcastURL">Podcast RSS Feed URL:</label>
+      <input
+        type="text"
+        id="podcastURL"
+        name="podcastURL"
+        ref={podcastURLInput}
+      />
+      <input type="submit" value="Fetch Podcast" />
+    </form>
   );
 };
 
