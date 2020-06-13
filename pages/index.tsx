@@ -7,6 +7,7 @@ import AudioPlayer from 'react-h5-audio-player';
 
 export default function Home(): JSX.Element {
   const [podcastUrl, setPodcastUrl] = useState('');
+  const [podcastEpisode, setPodcastEpisode] = useState('');
   return (
     <div className="index-page">
       <Head>
@@ -20,6 +21,7 @@ export default function Home(): JSX.Element {
             {(podcastContext): ReactNode => (
               <PodcastEpisodeList
                 podcastEpisodes={podcastContext.podcastEpisodes}
+                onClick={(src): void => setPodcastEpisode(src)}
               />
             )}
           </PodcastConsumer>
