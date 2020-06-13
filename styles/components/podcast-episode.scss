@@ -1,6 +1,11 @@
 .podcast-episode {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   padding: 12px 0;
+
+  .podcast-episode-button {
+    background: none;
+    border: none;
+    width: 60px;
+  }
 }

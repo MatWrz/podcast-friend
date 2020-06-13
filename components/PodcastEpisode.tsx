@@ -1,5 +1,4 @@
 import React from 'react';
-import AudioPlayer from 'react-h5-audio-player';
 import { PodcastEpisode as podcastEpisode } from 'types';
 
 interface Props {
@@ -10,11 +9,13 @@ interface Props {
 const PodcastEpisode: React.FC<Props> = ({ podcastEpisode, onClick }) => {
   return (
     <div className="podcast-episode">
-      <AudioPlayer
-        header={podcastEpisode.title}
-        src={podcastEpisode.src}
-        onPlay={(): void => onClick(podcastEpisode)}
-      />
+      <button
+        className="podcast-episode-button"
+        onClick={(): void => onClick(podcastEpisode)}
+      >
+        <img src="img/play-button.svg" />
+      </button>
+      <h3>{podcastEpisode.title}</h3>
     </div>
   );
 };
