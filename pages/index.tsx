@@ -4,10 +4,13 @@ import PodcastInput from 'components/PodcastInput';
 import PodcastEpisodeList from 'components/PodcastEpisodeList';
 import PodcastProvider, { PodcastConsumer } from 'components/PodcastProvider';
 import AudioPlayer from 'react-h5-audio-player';
+import { PodcastEpisode } from 'types';
 
 export default function Home(): JSX.Element {
   const [podcastUrl, setPodcastUrl] = useState('');
-  const [podcastEpisode, setPodcastEpisode] = useState('');
+  const [podcastEpisode, setPodcastEpisode] = useState<
+    PodcastEpisode | undefined
+  >(undefined);
   return (
     <div className="index-page">
       <Head>
@@ -21,13 +24,18 @@ export default function Home(): JSX.Element {
             {(podcastContext): ReactNode => (
               <PodcastEpisodeList
                 podcastEpisodes={podcastContext.podcastEpisodes}
-                onClick={(src): void => setPodcastEpisode(src)}
+                onClick={(podcastEpisode): void =>
+                  setPodcastEpisode(podcastEpisode)
+                }
               />
             )}
           </PodcastConsumer>
         </main>
         <footer className="index-page-footer">
-          <AudioPlayer />
+          <AudioPlayer
+            src={podcastEpisode ? podcastEpisode.src : undefined}
+            header={podcastEpisode ? podcastEpisode.title : undefined}
+          />
         </footer>
       </PodcastProvider>
     </div>

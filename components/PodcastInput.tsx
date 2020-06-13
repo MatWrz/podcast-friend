@@ -20,6 +20,7 @@ const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit }) => {
         type="text"
         id="podcastURL"
         name="podcastURL"
+        defaultValue={podcastURL}
         ref={podcastURLInput}
       />
       <input type="submit" value="Fetch Podcast" />

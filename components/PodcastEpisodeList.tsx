@@ -4,15 +4,19 @@ import { PodcastEpisode as podcastEpisode } from 'types';
 
 interface Props {
   readonly podcastEpisodes: ReadonlyArray<podcastEpisode>;
-  readonly onClick: (audioSrc: string) => void;
+  readonly onClick: (podcastEpisode: podcastEpisode) => void;
 }
 
 const displayPodcastEpisodes: (
   podcastEpisodes: ReadonlyArray<podcastEpisode>,
-  onClick: (audioSrc: string) => void
+  onClick: (podcastEpisode: podcastEpisode) => void
 ) => JSX.Element[] = (podcastEpisodes, onClick) => {
   return podcastEpisodes.map((podcastEpisode, index) => (
-    <PodcastEpisode key={index} {...podcastEpisode} onClick={onClick} />
+    <PodcastEpisode
+      key={index}
+      podcastEpisode={podcastEpisode}
+      onClick={onClick}
+    />
   ));
 };
 

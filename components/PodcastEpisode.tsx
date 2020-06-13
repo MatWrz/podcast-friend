@@ -2,14 +2,19 @@ import React from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import { PodcastEpisode as podcastEpisode } from 'types';
 
-interface Props extends podcastEpisode {
-  readonly onClick: (audioSrc: string) => void;
+interface Props {
+  readonly podcastEpisode: podcastEpisode;
+  readonly onClick: (podcastEpisode: podcastEpisode) => void;
 }
 
-const PodcastEpisode: React.FC<Props> = ({ title, src, onClick }) => {
+const PodcastEpisode: React.FC<Props> = ({ podcastEpisode, onClick }) => {
   return (
     <div className="podcast-episode">
-      <AudioPlayer header={title} src={src} onPlay={(): void => onClick(src)} />
+      <AudioPlayer
+        header={podcastEpisode.title}
+        src={podcastEpisode.src}
+        onPlay={(): void => onClick(podcastEpisode)}
+      />
     </div>
   );
 };
