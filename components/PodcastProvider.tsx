@@ -76,7 +76,9 @@ class PodcastProvider extends React.Component<Props, State> {
       ).map((item) => {
         return {
           title: item.getElementsByTagName('title')[0].textContent,
+          description: item.getElementsByTagName('description')[0].textContent,
           src: item.getElementsByTagName('enclosure')[0].getAttribute('url'),
+          publishedDate: item.getElementsByTagName('pubDate')[0].textContent,
         };
       });
       this.setState({ podcastEpisodes: podcastEpisodes });

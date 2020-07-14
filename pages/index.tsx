@@ -4,12 +4,17 @@ import PodcastInput from 'components/PodcastInput';
 import PodcastEpisodeList from 'components/PodcastEpisodeList';
 import PodcastProvider, { PodcastConsumer } from 'components/PodcastProvider';
 import AudioPlayer from 'react-h5-audio-player';
-import { PodcastEpisode } from 'types';
+import { PodcastEpisode, SelectedPodcastEpisode } from 'types';
 
 export default function Home(): JSX.Element {
-  const [podcastUrl, setPodcastUrl] = useState('');
+  const [podcastUrl, setPodcastUrl] = useState(
+    'https://www.omnycontent.com/d/playlist/aaea4e69-af51-495e-afc9-a9760146922b/64b5de49-d653-47c4-afe1-ab0600144b4b/87b34f0a-5ff9-491e-957c-ab0600144b63/podcast.rss'
+  );
   const [podcastEpisode, setPodcastEpisode] = useState<
     PodcastEpisode | undefined
+  >(undefined);
+  const [selectedPodcastEpisode, setSelectedPodcastEpisode] = useState<
+    SelectedPodcastEpisode
   >(undefined);
   return (
     <div className="index-page">
@@ -24,9 +29,10 @@ export default function Home(): JSX.Element {
             {(podcastContext): ReactNode => (
               <PodcastEpisodeList
                 podcastEpisodes={podcastContext.podcastEpisodes}
-                onClick={(podcastEpisode): void =>
-                  setPodcastEpisode(podcastEpisode)
-                }
+                selectedPodcastEpisode={selectedPodcastEpisode}
+                onClick={(podcastEpisode): void => {
+                  setPodcastEpisode(podcastEpisode);
+                }}
               />
             )}
           </PodcastConsumer>
@@ -35,11 +41,22 @@ export default function Home(): JSX.Element {
           <AudioPlayer
             src={podcastEpisode ? podcastEpisode.src : undefined}
             header={podcastEpisode ? podcastEpisode.title : undefined}
+            autoPlay
+            onPlay={(): void => {
+              setSelectedPodcastEpisode({
+                src: podcastEpisode.src,
+                isPlaying: true,
+              });
+            }}
+            onPause={(): void => {
+              setSelectedPodcastEpisode({
+                src: podcastEpisode.src,
+                isPlaying: false,
+              });
+            }}
           />
         </footer>
       </PodcastProvider>
     </div>
   );
 }
-//test feed
-//https://www.omnycontent.com/d/playlist/aaea4e69-af51-495e-afc9-a9760146922b/64b5de49-d653-47c4-afe1-ab0600144b4b/87b34f0a-5ff9-491e-957c-ab0600144b63/podcast.rss

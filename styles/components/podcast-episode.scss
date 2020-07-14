@@ -1,11 +1,35 @@
 .podcast-episode {
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding: 15px 0px 15px 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+
+  .podcast-episode-title {
+    margin-bottom: 4px;
+  }
+
+  .podcast-episode-date {
+    margin-bottom: 4px;
+  }
+
+  .podcast-episode-description {
+    line-height: 1.3em;
+    max-height: 2.6em;
+    overflow: hidden;
+  }
 
   .podcast-episode-button {
     background: none;
     border: none;
-    width: 60px;
+    width: 40px;
+  }
+
+  .podcast-episode-now-playing {
+    color: green;
+  }
+
+  .podcast-episode-controls {
+    min-width: 100px;
   }
 }
