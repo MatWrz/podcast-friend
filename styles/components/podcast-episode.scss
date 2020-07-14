@@ -1,6 +1,7 @@
 .podcast-episode {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px 0px 15px 20px;
   border: 1px solid black;
   border-radius: 4px;
@@ -17,6 +18,7 @@
     line-height: 1.3em;
     max-height: 2.6em;
     overflow: hidden;
+    word-break: break-word;
   }
 
   .podcast-episode-button {
@@ -30,6 +32,16 @@
   }
 
   .podcast-episode-controls {
+    display: flex;
+    justify-content: center;
     min-width: 100px;
+  }
+
+  @media screen and (max-width: 479px) {
+    flex-direction: column;
+
+    .podcast-episode-controls {
+      align-self: flex-end;
+    }
   }
 }
