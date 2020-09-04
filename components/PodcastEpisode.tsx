@@ -29,6 +29,9 @@ const PodcastEpisode: React.FC<Props> = ({
     : undefined;
   return (
     <div className="podcast-episode">
+      {podcastEpisode.image && (
+        <div className="podcast-episode-image"><img src={podcastEpisode.image}/></div>
+      )}
       <div className="podcast-episode-metadata">
         <div className="podcast-episode-metadata-heading">
           <h3 className="podcast-episode-title">{podcastEpisode.title}</h3>

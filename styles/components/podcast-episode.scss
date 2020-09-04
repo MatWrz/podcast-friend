@@ -8,11 +8,18 @@
 
   .podcast-episode-metadata-heading{
     display: flex;
+    > * {
+      margin-bottom: 4px;
+    }
+  }
+
+  .podcast-episode-image {
+    max-width: 105px;
+    margin-right: 8px;
   }
 
   .podcast-episode-title {
     font-weight: bold;
-    margin-bottom: 4px;
   }
 
   .podcast-episode-now-playing {
@@ -52,6 +59,18 @@
 
   @media screen and (max-width: 479px) {
     flex-direction: column;
+
+    .podcast-episode-metadata-heading {
+      flex-direction: column;
+    }
+
+    .podcast-episode-now-playing{
+      margin-left: 0;
+    }
+
+    .podcast-episode-image {
+      display: none;
+    }
 
     .podcast-episode-description {
       line-height: 1em;
