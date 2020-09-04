@@ -3,7 +3,7 @@ export interface PodcastEpisode {
   readonly src: string;
   readonly description?: string;
   readonly publishedDate?: string;
-  readonly length?: number;
+  readonly duration?: number;
 }
 
 export interface SelectedPodcastEpisode {

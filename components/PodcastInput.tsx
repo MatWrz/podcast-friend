@@ -1,29 +1,38 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface Props {
   readonly podcastURL: string;
   readonly onSubmit?: (podcastURL) => void;
+  readonly exampleFeed?: string;
 }
 
-const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit }) => {
-  const podcastURLInput = useRef(null);
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    onSubmit(
-      'https://cors-anywhere.herokuapp.com/' + podcastURLInput.current.value
-    );
+const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit, exampleFeed }) => {
+  const [podcastURLInput, setPodcastURLInput] = useState(podcastURL);
+  const fetchPodcast = (podcastURL: string): void => {
+    onSubmit(podcastURL);
   };
+  const loadExample = (): void => {
+    setPodcastURLInput(exampleFeed);
+    fetchPodcast(exampleFeed);
+  }
+
   return (
-    <form className="podcast-input" onSubmit={handleSubmit}>
+    <form className="podcast-input">
       <label htmlFor="podcastURL">Podcast RSS Feed URL:</label>
-      <input
-        type="text"
-        id="podcastURL"
-        name="podcastURL"
-        defaultValue={podcastURL}
-        ref={podcastURLInput}
-      />
-      <input type="submit" value="Fetch Podcast" />
+      <div>
+        <input
+          type="text"
+          id="podcastURL"
+          name="podcastURL"
+          defaultValue={podcastURLInput}
+          onChange={(event) => setPodcastURLInput(event.target.value)}
+        />
+      </div>
+      <div className="podcast-input-buttons">
+        <button className="podcast-input-buttons-fetch" type="button" onClick={() => fetchPodcast(podcastURLInput)}>Fetch Podcast</button>
+        {exampleFeed && 
+        (<button className="podcast-input-buttons-example" type="button" onClick={() => loadExample()}>Load Example</button>)}
+      </div>
     </form>
   );
 };

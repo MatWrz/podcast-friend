@@ -58,7 +58,7 @@ class PodcastProvider extends React.Component<Props, State> {
   }
 
   async fetchPodcast(): Promise<void> {
-    const response = await fetch(this.state.podcastURL, {
+    const response = await fetch("https://cors-anywhere.herokuapp.com/" + this.state.podcastURL, {
       headers: {
         'Content-Type': 'application/xml',
       },
@@ -79,6 +79,7 @@ class PodcastProvider extends React.Component<Props, State> {
           description: item.getElementsByTagName('description')[0].textContent,
           src: item.getElementsByTagName('enclosure')[0].getAttribute('url'),
           publishedDate: item.getElementsByTagName('pubDate')[0].textContent,
+          duration: parseInt(item.getElementsByTagName('itunes:duration')[0].textContent)
         };
       });
       this.setState({ podcastEpisodes: podcastEpisodes });

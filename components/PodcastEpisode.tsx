@@ -8,27 +8,45 @@ interface Props {
   readonly isPlaying?: boolean;
 }
 
+function secondsToHms(seconds: number): string {
+  let h = Math.floor(seconds / 3600);
+  let m = Math.floor(seconds % 3600 / 60);
+  let s = Math.floor(seconds % 3600 % 60);
+
+  let hDisplay = h > 0 ? h + "h" : "";
+  let mDisplay = m > 0 ? m + "m" : "";
+  let sDisplay = s > 0 ? s + "s" : "";
+  return h + m > 0 ? hDisplay + mDisplay : sDisplay; 
+}
+
 const PodcastEpisode: React.FC<Props> = ({
   podcastEpisode,
   onClick,
   isPlaying,
 }) => {
   const publishedDate = podcastEpisode.publishedDate
-    ? format(new Date(podcastEpisode.publishedDate), 'MMMM d, yyyy')
+    ? format(new Date(podcastEpisode.publishedDate), 'MMM d, yyyy')
     : undefined;
   return (
     <div className="podcast-episode">
       <div className="podcast-episode-metadata">
-        {publishedDate && (
-          <p className="podcast-episode-date">{publishedDate}</p>
-        )}
-        <h3 className="podcast-episode-title">{podcastEpisode.title}</h3>
-        {isPlaying && (
-          <p className="podcast-episode-now-playing">Now Playing</p>
-        )}
-        <p className="podcast-episode-description">
+        <div className="podcast-episode-metadata-heading">
+          <h3 className="podcast-episode-title">{podcastEpisode.title}</h3>
+          {isPlaying && (
+            <div className="podcast-episode-now-playing">Now Playing</div>
+          )}
+        </div>
+        <div className="podcast-episode-metadata-details">
+          {publishedDate && (
+            <div className="podcast-episode-date">{publishedDate}</div>
+          )}
+          {podcastEpisode.duration && (
+            <div className="podcast-episode-duration">{secondsToHms(podcastEpisode.duration)}</div>
+          )}
+        </div>
+        {podcastEpisode.description && (<p className="podcast-episode-description">
           {podcastEpisode.description}
-        </p>
+        </p>)}
       </div>
       <div className="podcast-episode-controls">
         <button

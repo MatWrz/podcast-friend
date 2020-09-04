@@ -3,8 +3,16 @@
   justify-content: center;
   flex-wrap: wrap;
 
+  > * {
+    padding: 6px 0;
+  }
+
   #podcastURL {
     min-width: 200px;
     margin: 0 10px;
+  }
+
+  .podcast-input-buttons-fetch {
+    margin-right: 8px;
   }
 }
