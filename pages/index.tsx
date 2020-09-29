@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
   return (
     <div className="index-page">
       <Head>
-        <title>Compodre | Podcast Listener</title>
+        <title>Podcast Friend | Podcast Listener</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GitHubCorner/>
