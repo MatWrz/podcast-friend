@@ -75,12 +75,12 @@ class PodcastProvider extends React.Component<Props, State> {
         items
       ).map((item) => {
         return {
-          title: item.getElementsByTagName('title')[0].textContent,
-          description: item.getElementsByTagName('description')[0].textContent,
-          src: item.getElementsByTagName('enclosure')[0].getAttribute('url'),
-          image: item.getElementsByTagName('itunes:image')[0].getAttribute('href'),
-          publishedDate: item.getElementsByTagName('pubDate')[0].textContent,
-          duration: parseInt(item.getElementsByTagName('itunes:duration')[0].textContent)
+          title: item.getElementsByTagName('title')[0]?.textContent,
+          description: item.getElementsByTagName('description')[0]?.textContent,
+          src: item.getElementsByTagName('enclosure')[0]?.getAttribute('url'),
+          image: item.getElementsByTagName('itunes:image')[0]?.getAttribute('href'),
+          publishedDate: item.getElementsByTagName('pubDate')[0]?.textContent,
+          duration: parseInt(item.getElementsByTagName('itunes:duration')[0]?.textContent)
         };
       });
       this.setState({ podcastEpisodes: podcastEpisodes });
