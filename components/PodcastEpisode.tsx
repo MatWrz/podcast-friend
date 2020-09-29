@@ -54,13 +54,14 @@ const PodcastEpisode: React.FC<Props> = ({
       <div className="podcast-episode-controls">
         <button
           className="podcast-episode-button"
+          title="Play Podcast Episode"
           onClick={(): void => onClick(podcastEpisode)}
         >
-          <img src="img/play-button.svg" />
+          <img src="/img/play-button.svg" />
         </button>
-        <button className="podcast-episode-button">
-          <img src="img/download-button.svg" />
-        </button>
+        <a className="podcast-episode-button" type="button" title="Download Podcast Episode" href={podcastEpisode.src} target="_blank">
+          <img src="/img/download-button.svg" />
+        </a>
       </div>
     </div>
   );
