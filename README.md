@@ -3,4 +3,4 @@ Web app to listen to podcasts in your browser. Provide an RSS feed and get liste
 
 GitHub Actions workflow described [here](.github/workflows/build.yml)
 
-You can try it out here: https://dazzling-torvalds-710eec.netlify.app/
+You can try it out here: https://podcast-friend.netlify.app/
