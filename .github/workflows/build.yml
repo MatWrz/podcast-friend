@@ -7,12 +7,12 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.0.0
+      - uses: actions/checkout@v2.3.4
 
       - name: Setup Node
-        uses: actions/setup-node@v1.1.0
+        uses: actions/setup-node@v2.1.5
         with:
           version: '14'
 
@@ -21,7 +21,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v1.1.0
+        uses: actions/cache@v2.1.4
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
