@@ -6,7 +6,11 @@ interface Props {
   readonly exampleFeed?: string;
 }
 
-const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit, exampleFeed }) => {
+const PodcastInput: React.FC<Props> = ({
+  podcastURL,
+  onSubmit,
+  exampleFeed,
+}) => {
   const [podcastURLInput, setPodcastURLInput] = useState(podcastURL);
   const fetchPodcast = (podcastURL: string): void => {
     onSubmit(podcastURL);
@@ -14,7 +18,7 @@ const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit, exampleFeed }) =>
   const loadExample = (): void => {
     setPodcastURLInput(exampleFeed);
     fetchPodcast(exampleFeed);
-  }
+  };
 
   return (
     <form className="podcast-input">
@@ -29,9 +33,22 @@ const PodcastInput: React.FC<Props> = ({ podcastURL, onSubmit, exampleFeed }) =>
         />
       </div>
       <div className="podcast-input-buttons">
-        <button className="podcast-input-buttons-fetch" type="button" onClick={() => fetchPodcast(podcastURLInput)}>Fetch Podcast</button>
-        {exampleFeed && 
-        (<button className="podcast-input-buttons-example" type="button" onClick={() => loadExample()}>Load Example</button>)}
+        <button
+          className="podcast-input-buttons-fetch"
+          type="button"
+          onClick={() => fetchPodcast(podcastURLInput)}
+        >
+          Fetch Podcast
+        </button>
+        {exampleFeed && (
+          <button
+            className="podcast-input-buttons-example"
+            type="button"
+            onClick={() => loadExample()}
+          >
+            Load Example
+          </button>
+        )}
       </div>
     </form>
   );

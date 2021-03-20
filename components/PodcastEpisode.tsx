@@ -9,14 +9,14 @@ interface Props {
 }
 
 function secondsToHms(seconds: number): string {
-  let h = Math.floor(seconds / 3600);
-  let m = Math.floor(seconds % 3600 / 60);
-  let s = Math.floor(seconds % 3600 % 60);
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor((seconds % 3600) % 60);
 
-  let hDisplay = h > 0 ? h + "h" : "";
-  let mDisplay = m > 0 ? m + "m" : "";
-  let sDisplay = s > 0 ? s + "s" : "";
-  return h + m > 0 ? hDisplay + mDisplay : sDisplay; 
+  const hDisplay = h > 0 ? h + 'h' : '';
+  const mDisplay = m > 0 ? m + 'm' : '';
+  const sDisplay = s > 0 ? s + 's' : '';
+  return h + m > 0 ? hDisplay + mDisplay : sDisplay;
 }
 
 const PodcastEpisode: React.FC<Props> = ({
@@ -30,7 +30,9 @@ const PodcastEpisode: React.FC<Props> = ({
   return (
     <div className="podcast-episode">
       {podcastEpisode.image && (
-        <div className="podcast-episode-image"><img src={podcastEpisode.image}/></div>
+        <div className="podcast-episode-image">
+          <img src={podcastEpisode.image} />
+        </div>
       )}
       <div className="podcast-episode-metadata">
         <div className="podcast-episode-metadata-heading">
@@ -44,12 +46,16 @@ const PodcastEpisode: React.FC<Props> = ({
             <div className="podcast-episode-date">{publishedDate}</div>
           )}
           {podcastEpisode.duration && (
-            <div className="podcast-episode-duration">{secondsToHms(podcastEpisode.duration)}</div>
+            <div className="podcast-episode-duration">
+              {secondsToHms(podcastEpisode.duration)}
+            </div>
           )}
         </div>
-        {podcastEpisode.description && (<p className="podcast-episode-description">
-          {podcastEpisode.description}
-        </p>)}
+        {podcastEpisode.description && (
+          <p className="podcast-episode-description">
+            {podcastEpisode.description}
+          </p>
+        )}
       </div>
       <div className="podcast-episode-controls">
         <button
@@ -59,7 +65,14 @@ const PodcastEpisode: React.FC<Props> = ({
         >
           <img src="/img/play-button.svg" />
         </button>
-        <a className="podcast-episode-button" type="button" title="Download Podcast Episode" href={podcastEpisode.src} target="_blank">
+        <a
+          className="podcast-episode-button"
+          type="button"
+          title="Download Podcast Episode"
+          href={podcastEpisode.src}
+          target="_blank"
+          rel="noreferrer"
+        >
           <img src="/img/download-button.svg" />
         </a>
       </div>

@@ -33,7 +33,7 @@ export const PodcastContext = React.createContext<PodcastContextProps>({
 export const PodcastConsumer = PodcastContext.Consumer;
 
 class PodcastProvider extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Readonly<Props>) {
     super(props);
     this.state = {
       podcastURL: this.props.podcastURL,
@@ -58,11 +58,14 @@ class PodcastProvider extends React.Component<Props, State> {
   }
 
   async fetchPodcast(): Promise<void> {
-    const response = await fetch("https://podcast-fetch.herokuapp.com/" + this.state.podcastURL, {
-      headers: {
-        'Content-Type': 'application/xml',
-      },
-    });
+    const response = await fetch(
+      'https://podcast-fetch.herokuapp.com/' + this.state.podcastURL,
+      {
+        headers: {
+          'Content-Type': 'application/xml',
+        },
+      }
+    );
     const responseBody = await response.text();
     const document = new DOMParser().parseFromString(
       responseBody,
@@ -78,9 +81,13 @@ class PodcastProvider extends React.Component<Props, State> {
           title: item.getElementsByTagName('title')[0]?.textContent,
           description: item.getElementsByTagName('description')[0]?.textContent,
           src: item.getElementsByTagName('enclosure')[0]?.getAttribute('url'),
-          image: item.getElementsByTagName('itunes:image')[0]?.getAttribute('href'),
+          image: item
+            .getElementsByTagName('itunes:image')[0]
+            ?.getAttribute('href'),
           publishedDate: item.getElementsByTagName('pubDate')[0]?.textContent,
-          duration: parseInt(item.getElementsByTagName('itunes:duration')[0]?.textContent)
+          duration: parseInt(
+            item.getElementsByTagName('itunes:duration')[0]?.textContent
+          ),
         };
       });
       this.setState({ podcastEpisodes: podcastEpisodes });
